@@ -385,9 +385,7 @@ def _statreqs(
     c: Config, varname: str, level: float | None, cycle: datetime | None = None
 ) -> Sequence[Node]:
     genreqs = lambda source: [_stat(*args) for args in _statargs(c, varname, level, source, cycle)]
-    print(genreqs)
     reqs: Sequence[Node] = genreqs(Source.FORECAST)
-    print(reqs)
     if c.baseline.compare:
         reqs = [*reqs, *genreqs(Source.BASELINE)]
     return reqs
