@@ -1,0 +1,33 @@
+baseline:
+  compare: true # or false if you don't want to compare GFS-vs-GFS alongside Anemoi-vs-GFS
+  name: GFS
+  url: https://noaa-gfs-bdp-pds.s3.amazonaws.com/gfs.{yyyymmdd}/{hh}/atmos/gfs.t{hh}z.pgrb2.0p25.f{fh:03}
+cycles:
+  - 2022-02-01T12:00:00
+forecast:
+  coords:
+    latitude: latitude
+    level: level
+    longitude: longitude
+    time:
+      inittime: forecast_reference_time
+      validtime: time
+  name: Res
+  path: /gpfs/f6/bil-fire8/scratch/David.Burrows/wxvx/2022_test.nc
+  projection:
+    proj: latlon
+leadtimes: [0]
+meta:
+  grids: "{{ meta.workdir }}/grids"
+  levels: &levels [500]
+  workdir: /gpfs/f6/bil-fire8/scratch/David.Burrows/wxvx/aug5/output_simple
+paths:
+  grids:
+    baseline: "{{ meta.grids }}/baseline"
+    forecast: "{{ meta.grids }}/forecast"
+  run: "{{ meta.workdir }}/run"
+variables:
+  temperature:
+    level_type: isobaricInhPa
+    levels: *levels
+    name: t
